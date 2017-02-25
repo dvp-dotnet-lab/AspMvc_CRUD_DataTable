@@ -43,7 +43,7 @@ namespace AspMvcDataTable_CRUD.Controllers
             {
                 using (Article_CRUD_DataTableEntities db = new Article_CRUD_DataTableEntities())
                 {
-                    if (emp.EmployeeID > 0)
+                    if (emp.uEmployeeID > 0)
                     {
                         //edit
                         var v = db.Employees.Where(a => a.EmployeeID == emp.EmployeeID).FirstOrDefault();
