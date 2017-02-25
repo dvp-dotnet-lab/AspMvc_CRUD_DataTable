@@ -24,5 +24,48 @@ namespace AspMvcDataTable_CRUD.Controllers
                 return Json(new { data = employees }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        [HttpPost]
+        public ActionResult Save(int id)
+        {
+            using (Article_CRUD_DataTableEntities db = new Article_CRUD_DataTableEntities())
+            {
+                var v = db.Employees.Where(a => a.EmployeeID == id).FirstOrDefault();
+                return View(v);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Employee emp)
+        {
+            bool status = false;
+            if (ModelState.IsValid)
+            {
+                using (Article_CRUD_DataTableEntities db = new Article_CRUD_DataTableEntities())
+                {
+                    if (emp.EmployeeID > 0)
+                    {
+                        //edit
+                        var v = db.Employees.Where(a => a.EmployeeID == emp.EmployeeID).FirstOrDefault();
+                        if (v != null)
+                        {
+                            v.FirstName = emp.FirstName;
+                            v.LastName = emp.LastName;
+                            v.EmailID = emp.EmailID;
+                            v.City = emp.City;
+                            v.Country = emp.Country;
+                        }
+                    }
+                    else
+                    {
+                        //save
+                        db.Employees.Add(emp);
+                    }
+                    db.SaveChanges();
+                    status = true;
+                }
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
     }
 }
