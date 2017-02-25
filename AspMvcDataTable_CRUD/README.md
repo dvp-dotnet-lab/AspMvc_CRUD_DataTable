@@ -28,3 +28,5 @@ GO
 ```
 
 Add Is Identity on PrimaryKey Only if use EF saveChange()
+
+Finished .... 
