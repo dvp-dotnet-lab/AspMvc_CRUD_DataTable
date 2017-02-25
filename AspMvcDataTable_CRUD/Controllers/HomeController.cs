@@ -67,5 +67,42 @@ namespace AspMvcDataTable_CRUD.Controllers
             }
             return new JsonResult { Data = new { status = status } };
         }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            using (Article_CRUD_DataTableEntities db = new Article_CRUD_DataTableEntities())
+            {
+                var v = db.Employees.Where(a => a.EmployeeID == id).FirstOrDefault();
+                if (v != null)
+                {
+                    return View(v);
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+
+        }
+
+        [HttpGet]
+        [ActionName("Delete")]
+        public ActionResult DeleteEmployee(int id)
+        {
+            bool status = false;
+            using (Article_CRUD_DataTableEntities db = new Article_CRUD_DataTableEntities())
+            {
+                var v =db.Employees.Where(a => a.EmployeeID == id ).FirstOrDefault();
+                if (v != null)
+                {
+                    db.Employees.Remove(v);
+                    db.SaveChanges();
+                }
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+
+
     }
 }
