@@ -25,7 +25,7 @@ namespace AspMvcDataTable_CRUD.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Save(int id)
         {
             using (Article_CRUD_DataTableEntities db = new Article_CRUD_DataTableEntities())
@@ -36,7 +36,7 @@ namespace AspMvcDataTable_CRUD.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Employee emp)
+        public ActionResult Save(Employee emp)
         {
             bool status = false;
             if (ModelState.IsValid)
@@ -67,8 +67,7 @@ namespace AspMvcDataTable_CRUD.Controllers
             }
             return new JsonResult { Data = new { status = status } };
         }
-
-        [HttpPost]
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             using (Article_CRUD_DataTableEntities db = new Article_CRUD_DataTableEntities())
@@ -86,7 +85,7 @@ namespace AspMvcDataTable_CRUD.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("Delete")]
         public ActionResult DeleteEmployee(int id)
         {

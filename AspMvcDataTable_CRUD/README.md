@@ -26,3 +26,5 @@ INSERT INTO [_Article_CRUD_DataTable].[dbo].[Employee]
 GO
 
 ```
+
+Add Is Identity on PrimaryKey Only if use EF saveChange()
